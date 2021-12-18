@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * prefix表示配置项的前缀
  * 配置类中的变量名必须与配置前缀之后的配置项名称 保持松散绑定
  */
-@ConfigurationProperties(prefix = "jdbc")
+//@ConfigurationProperties(prefix = "jdbc")
 public class JdbcProperties {
   private String driver;
   private String url;
