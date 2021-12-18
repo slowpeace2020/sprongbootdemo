@@ -65,3 +65,69 @@ public class JdbcConfig {
 2. 将jdbc.properties修改名称为application.properties；
 3. 将JdbcProperties对象注入到JdbcConfig；
 
+
+## 5. 多个yml文件配置
+
+**目标**：可以将多个yml文件在application.yml文件中配置激活
+
+**分析**：
+
+yaml与properties配置文件除了展示形式不相同以外，其它功能和作用都是一样的；在项目中原路的读取方式不需要改变。
+
+1）yml配置文件的特征：
+
+1. 树状层级结构展示配置项；
+2. 配置项之间如果有关系的话需要分行空两格；
+3. 配置项如果有值的话，那么需要在 `:`之后空一格再写配置项值；
+
+将application.properties配置文件修改为application.yml的话：
+
+2）多个yml配置文件；在spring boot中是被允许的。这些配置文件的名称必须为application-***.yml，并且这些配置文件必须要在application.yml配置文件中激活之后才可以使用。
+
+
+
+3）如果properties和yml配置文件同时存在在spring boot项目中；那么这两类配置文件都有效。在两个配置文件中如果存在同名的配置项的话会以properties文件的为主。
+
+
+
+**小结**：
+
+在多个配置文件时，需要将这些文件在application.yml文件中进行激活：
+
+## 6. 自动配置原理
+
+**目标**：了解Spring Boot项目的配置加载流程
+
+**小结**：
+
+- 在 `META-INF\spring.fatories`文件中定义了很多自动配置类；可以根据在pom.xml文件中添加的 启动器依赖自动配置组件
+- 通过如下流程可以去修改application配置文件，改变自动配置的组件默认参数
+
+![spring修改配置](mdimg/spring修改配置.png)
+
+
+## 7. lombok应用
+
+**目标**：使用lombok的注解实现pojo类的简化
+
+**分析**：
+
+使用Spring Boot整合SSM工程；需要使用到数据库数据。
+
+- 将数据库表数据导入到数据库中（springboot_test）；
+
+- 编写数据库表对应的实体类；一般情况下需要编写get/set/toString等这些方法会耗时并且会让实体类看起来比较臃肿。可以使用lombok插件对实体类进行简化。
+
+  lombok是一个插件工具类包；提供了一些注解@Data、@Getter等这些注解去简化实体类中的构造方法、get/set等方法的编写。
+
+  1. 在IDEA中安装lombok插件；
+  2. 添加lombok对应的依赖到项目pom.xml文件；
+  3. 改造实体类使用lombok注解
+
+**小结**：
+
+在Bean上使用：
+@Data ：自动提供getter和setter、hashCode、equals、toString等方法
+@Getter：自动提供getter方法
+@Setter：自动提供setter方法
+@Slf4j：自动在bean中提供log变量，其实用的是slf4j的日志功能。
