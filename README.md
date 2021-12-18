@@ -21,3 +21,47 @@ Spring Boot工程可以通过添加启动器依赖和创建启动引导类实现
 Spring的Java配置方式是通过 @Configuration 和 @Bean 这两个注解实现的：
 1、@Configuration 作用于类上，相当于一个xml配置文件；
 2、@Bean 作用于方法上，相当于xml配置中的<bean>；
+
+```
+@Configuration
+@PropertySource("classpath:jdbc.properties")
+public class JdbcConfig {
+
+  @Value("${jdbc.url}")
+  private String url;
+  @Value("${jdbc.driver}")
+  private String driver;
+  @Value("${jdbc.user}")
+  private String user;
+  @Value("${jdbc.password}")
+  private String password;
+
+  @Bean
+  public DataSource dataSource(){
+    DruidDataSource dataSource = new DruidDataSource();
+    dataSource.setDriverClassName(driver);
+    dataSource.setUrl(url);
+    dataSource.setUsername(user);
+    dataSource.setPassword(password);
+    return dataSource;
+  }
+
+}
+```
+
+## 4. Spring Boot属性注入方式
+
+**目标**：能够使用@ConfigurationProperties实现Spring Boot配置文件配置项读取和应用
+
+**分析**：
+
+需求：将配置文件中的配置项读取到一个对象中；
+
+实现：可以使用Spring Boot提供的注解@ConfigurationProperties，该注解可以将Spring Boot的配置文件（默认必须为application.properties或application.yml）中的配置项读取到一个对象中。
+
+实现步骤：
+
+1. 创建配置项类JdbcProperties类，在该类名上面添加@ConfigurationProperties；
+2. 将jdbc.properties修改名称为application.properties；
+3. 将JdbcProperties对象注入到JdbcConfig；
+
