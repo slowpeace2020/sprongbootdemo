@@ -7,12 +7,21 @@ jdbc:
 spring:
   profiles:
     active: go,test
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/boottest
+    username: root
+    password: 123456test!
+
 
 #Tomcat端口
 server:
   port: 9090
+
+#设置日志记录级别
 logging:
   level:
     com.myspringboot: debug
     org.springframework: info
-#设置日志记录级别
+
+#设置数据源

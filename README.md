@@ -183,3 +183,33 @@ public class ResourceProperties {
 可以在spring boot项目中通过配置类添加各种组件；如果要添加拦截器的话：
 
 
+
+## 10. Spring Boot整合-事务和连接池
+
+**目标**：配置Spring Boot自带默认的hikari数据库连接池和使用@Transactional注解进行事务配置
+
+**分析**：
+
+- 事务配置
+
+  1. 添加事务相关的启动器依赖，mysql相关依赖；
+  2. 编写业务类UserService使用事务注解@Transactional
+
+- 数据库连接池hikari配置
+
+  只需要在application配置文件中指定数据库相关参数
+
+**小结**：
+
+- 事务配置；只需要添加jdbc启动器依赖
+- 数据库连接池使用默认的hikari，在配置文件中配置如下：
+
+```yml
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springboot_test
+    username: root
+    password: root
+
+```
