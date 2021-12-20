@@ -213,3 +213,59 @@ spring:
     password: root
 
 ```
+## 11. Spring Boot整合-Mybatis
+
+**目标**：配置Mybatis在Spring Boot工程中的整合包，设置mybatis的实体类别名，输出执行sql语句配置项
+
+**分析**：
+
+1. 添加启动器依赖；
+2. 配置Mybatis：实体类别名包，日志，映射文件等；
+3. 配置MapperScan
+
+**小结**：
+
+- 添加mybatis官方对于spring boot的一个启动器
+
+  ```xml
+          <!--mybatis -->
+          <dependency>
+              <groupId>org.mybatis.spring.boot</groupId>
+              <artifactId>mybatis-spring-boot-starter</artifactId>
+              <version>2.0.1</version>
+          </dependency>
+  
+  ```
+
+  
+
+- 配置mybatis
+
+  ```yml
+  mybatis:
+    # 实体类别名包路径
+    type-aliases-package: com.itheima.pojo
+    # 映射文件路径
+    # mapper-locations: classpath:mappers/*.xml
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  ```
+
+ 
+- 设置启动器类中的mapper扫描
+
+## 12. Spring Boot整合-通用Mapper
+
+**目标**：配置通用Mapper组件到Spring Boot项目中并使用Mapper<T>接口
+
+**分析**：
+
+通用Mapper：可以实现自动拼接sql语句；所有的mapper都不需要编写任何方法也就是不用编写sql语句。可以提高开发效率。
+
+1. 添加启动器依赖；
+2. 改造UserMapper继承Mapper<User>；
+3. 修改启动引导类Application中的Mapper扫描注解；
+4. 修改User实体类添加jpa注解；
+5. 改造UserService实现业务功能；
+
+**小结**：

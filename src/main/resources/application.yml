@@ -4,9 +4,11 @@ jdbc:
   username: root
   password: 123456test!
 
+#整合其他yml文件
 spring:
   profiles:
     active: go,test
+  #设置数据源
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/boottest
@@ -24,4 +26,11 @@ logging:
     com.myspringboot: debug
     org.springframework: info
 
-#设置数据源
+mybatis:
+  #实体类别名包路径
+  type-aliases-package: com.myspringboot.pojo
+  #映射文件路径
+#  mapper-locations: classpath:mappers/*xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
