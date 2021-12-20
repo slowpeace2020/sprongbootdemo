@@ -131,3 +131,55 @@ yaml与properties配置文件除了展示形式不相同以外，其它功能和
 @Getter：自动提供getter方法
 @Setter：自动提供setter方法
 @Slf4j：自动在bean中提供log变量，其实用的是slf4j的日志功能。
+
+## 8. Spring Boot整合-SpringMVC端口和静态资源
+
+**目标**：可以修改tomcat的端口和访问项目中的静态资源
+
+**分析**：
+
+- 修改tomcat端口
+
+  查询**Properties，设置配置项（前缀+类变量名）到application配置文件中
+
+- 访问项目中的静态资源
+
+  静态资源放置的位置；放置静态资源并访问这些资源
+
+**小结**：
+
+- 修改项目tomcat端口：
+
+```yml
+#tomcat端口
+server:
+  port: 80
+```
+
+- 在spring boot项目中静态资源可以放置在如下目录：
+```
+@ConfigurationProperties(
+    prefix = "spring.resources",
+    ignoreUnknownFields = false
+)
+public class ResourceProperties {
+    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = new String[]{"classpath:/META-INF/resources/", "classpath:/resources/", "classpath:/static/", "classpath:/public/"};
+    private String[] staticLocations;
+    }
+```
+
+## 9.Spring Boot整合-SpringMVC拦截器
+
+**目标**：可以在Spring Boot项目中配置自定义SpringMVC拦截器
+
+**分析**：
+
+1. 编写拦截器（实现HandlerInterceptor）；
+2. 编写配置类实现 WebMvcConfigurer，在该类中添加各种组件；
+3. 测试
+
+**小结**：
+
+可以在spring boot项目中通过配置类添加各种组件；如果要添加拦截器的话：
+
+

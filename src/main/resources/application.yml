@@ -4,7 +4,15 @@ jdbc:
   username: root
   password: 123456test!
 
-#??????? ???????????
 spring:
   profiles:
     active: go,test
+
+#Tomcat端口
+server:
+  port: 9090
+logging:
+  level:
+    com.myspringboot: debug
+    org.springframework: info
+#设置日志记录级别
