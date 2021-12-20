@@ -269,3 +269,45 @@ spring:
 5. 改造UserService实现业务功能；
 
 **小结**：
+
+
+## 14. Spring Boot整合-Junit
+
+**目标**：在Spring Boot项目中使用Junit进行单元测试UserService的方法
+
+**分析**：
+
+1. 添加启动器依赖spring-boot-starter-test；
+2. 编写测试类
+
+
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class UserServiceTest {
+
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void queryById() {
+        User user = userService.queryById(8L);
+        System.out.println("user = " + user);
+    }
+
+    @Test
+    public void saveUser() {
+        User user = new User();
+        user.setUserName("test2");
+        user.setName("test2");
+        user.setAge(13);
+        user.setPassword("123456");
+        user.setSex(1);
+        user.setCreated(new Date());
+        userService.saveUser(user);
+    }
+}
+```
+**小结**：
+> 在Spring Boot项目中如果编写测试类则必须要在类上面添加@SpringBootTest

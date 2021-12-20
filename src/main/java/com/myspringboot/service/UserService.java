@@ -4,6 +4,7 @@ import com.myspringboot.mapper.UserMapper;
 import com.myspringboot.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService {
@@ -16,6 +17,7 @@ public class UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    @Transactional
     public void save(User user){
         System.out.println("save user.....");
         userMapper.insertSelective(user);
